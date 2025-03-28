@@ -42,7 +42,7 @@ def main(page: Page):
                 View(
                     "/segunda",[
                         AppBar(title=Text("segunda tela"), bgcolor=Colors.SECONDARY_CONTAINER),
-                        ft.TextField(f'{input_sobrenome.value}')
+                        ft.TextField(f'Bem vindo {input_sobrenome.value}')
                         ]
                 )
             )
