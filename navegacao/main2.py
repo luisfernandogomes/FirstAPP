@@ -43,11 +43,11 @@ def main(page: Page):
                 View(
                     "/segunda", [
                         AppBar(title=Text("segunda tela"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        ft.TextField(f'{input_titulo.value}', bgcolor=Colors.ORANGE),
+                        ft.TextField(f'{input_descricao.value}', bgcolor=Colors.BLUE),
+                        ft.TextField(input_categoria.value, bgcolor=Colors.YELLOW),
+                        ft.TextField(input_autor.value, bgcolor=Colors.PURPLE),
 
-                        ft.TextField(f'{input_titulo.value}'),
-                        ft.TextField(f'{input_descricao.value}'),
-                        ft.TextField(f'{input_categoria.value}'),
-                        ft.TextField(f'{input_autor.value}')
                     ]
                 )
             )
