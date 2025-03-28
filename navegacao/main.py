@@ -11,6 +11,12 @@ def main(page: Page):
     page.window_width = 375
     page.window_height = 667
 
+    input_sobrenome = ft.TextField(label="digite seu sobrenome", hint_text="digite seu sobrenome")
+
+    print_nome = ft.Text(value="dadada")
+
+
+
     def voltar(e):
         page.views.pop()
         top_view = page.views[-1]
@@ -24,7 +30,10 @@ def main(page: Page):
                 "/",
                 [
                     AppBar(title=Text("home"), bgcolor=Colors.PRIMARY_CONTAINER),
-                    ElevatedButton(text="Navegar", on_click=lambda _: page.go("/segunda"))
+                    ElevatedButton(text="Navegar", on_click=lambda _: page.go("/segunda")),
+                    input_sobrenome
+
+
                 ]
             )
         )
@@ -32,7 +41,8 @@ def main(page: Page):
             page.views.append(
                 View(
                     "/segunda",[
-                        AppBar(title=Text("segunda tela"), bgcolor=Colors.SECONDARY_CONTAINER)
+                        AppBar(title=Text("segunda tela"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        ft.TextField(f'{input_sobrenome.value}')
                         ]
                 )
             )
