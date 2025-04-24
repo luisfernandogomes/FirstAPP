@@ -33,16 +33,16 @@ def main(page: Page):
                     input_descricao,
                     input_categoria,
                     input_autor,
-                    ElevatedButton(text="Navegar", on_click=lambda _: page.go("/segunda"))
+                    ElevatedButton(text="Regras", on_click=lambda _: page.go("/regras"))
 
                 ]
             )
         )
-        if page.route == "/segunda":
+        if page.route == "/regras":
             page.views.append(
                 View(
-                    "/segunda", [
-                        AppBar(title=Text("segunda tela"), bgcolor=Colors.SECONDARY_CONTAINER),
+                    "/regras", [
+                        AppBar(title=Text("Regras"), bgcolor=Colors.SECONDARY_CONTAINER),
                         ft.TextField(f'{input_titulo.value}', bgcolor=Colors.ORANGE, width=page.width,),
                         ft.TextField(f'{input_descricao.value}', bgcolor=Colors.BLUE),
                         ft.TextField(input_categoria.value, bgcolor=Colors.AMBER),
