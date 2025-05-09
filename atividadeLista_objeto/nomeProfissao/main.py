@@ -1,14 +1,11 @@
-from datetime import date
-
 import flet as ft
 from flet import AppBar, Text, View
 from flet.core.colors import Colors
 
-class Livro():
-    def __init__(self, nome, descricao, autor):
-        self.nome = nome
-        self.descricao = descricao
-        self.autor = autor
+class User():
+    def __init__(self, name, profissao):
+        self.name = name
+        self.profissao = profissao
 
 def main(page: ft.Page):
     # Configurações
@@ -17,32 +14,32 @@ def main(page: ft.Page):
     page.window.width = 375
     page.window.height = 667
 
-
+    # Funções
 
     lista = []
-    # Funções
     def exibir_lista(e):
         lv_Descricao.controls.clear()
-        for livro in lista:
+        for user in lista:
             lv_Descricao.controls.append(
-                ft.Text(value=f'nome do livro {livro.nome} \ndescrição: {livro.descricao}\nautor: {livro.autor}')
+                ft.Text(value=f'nome: {user.name};\nprofissão: {user.profissao}')
             )
-    def salvar_user(e):
-        if input_nome.value == '' or input_descricao.value == '' or input_autor.value == '':
+    def salvar_itens(e):
+        if inputName.value == '' or inputProfissao.value == '':
+            page.overlay.append(msg_error)
+            msg_error.open = True
+            page.update()
+        elif inputName.value in lista or inputProfissao.value in lista:
             page.overlay.append(msg_error)
             msg_error.open = True
             page.update()
         else:
-            livro = Livro(nome=input_nome.value, descricao=input_descricao.value, autor=input_autor.value)
-            lista.append(livro)
-
-            input_nome.value = ''
-            input_descricao.value = ''
-            input_autor.value = ''
+            user = User(name=inputName.value, profissao=inputProfissao.value)
+            lista.append(user)
+            inputName.value = ''
+            inputProfissao.value = ''
             page.overlay.append(msg_sucesso)
             msg_sucesso.open = True
             page.update()
-
 
     def gerencia_rotas(e):
         page.views.clear()
@@ -51,15 +48,14 @@ def main(page: ft.Page):
                 "/",
                 [
                     AppBar(title=Text("Home"), bgcolor=Colors.PRIMARY_CONTAINER),
-                    input_nome,
-                    input_descricao,
-                    input_autor,
+                    inputName,
+                    inputProfissao,
                     ft.Button(
-                        text="Salvar",
-                        on_click=lambda _: salvar_user(e),
+                        text='salvar',
+                        on_click=lambda _: salvar_itens(e)
                     ),
                     ft.Button(
-                        text="Exibir",
+                        text='Exibir',
                         on_click=lambda _: page.go('/segunda'),
                     )
                 ],
@@ -73,7 +69,8 @@ def main(page: ft.Page):
                     [
                         AppBar(title=Text("Segunda tela"), bgcolor=Colors.SECONDARY_CONTAINER),
                         lv_Descricao,
-                        ft.FloatingActionButton('+', page.go('/'),)
+                        ft.FloatingActionButton('+', on_click=lambda _: page.go('/'),)
+
                     ],
                 )
             )
@@ -86,6 +83,7 @@ def main(page: ft.Page):
 
 
     # Componentes
+
     msg_sucesso = ft.SnackBar(
         content=ft.Text(value='nome salvado com sucesso'),
         bgcolor=Colors.GREEN,
@@ -106,9 +104,9 @@ def main(page: ft.Page):
         height=500,
 
     )
-    input_nome = ft.TextField(label="Digite o nome do livro")
-    input_descricao = ft.TextField(label='insira a descricao do livro')
-    input_autor = ft.TextField(label='insira o autor do livro')
+    inputName = ft.TextField(label='digite seu nome')
+    inputProfissao = ft.TextField(label='digite seu profissão')
+
     # Eventos
     page.on_route_change = gerencia_rotas
     page.on_view_pop = voltar
