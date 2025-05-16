@@ -7,6 +7,7 @@ class User():
         self.name = name
         self.profissao = profissao
         self.salario = salario
+# teste
 
 def main(page: ft.Page):
     # Configurações
