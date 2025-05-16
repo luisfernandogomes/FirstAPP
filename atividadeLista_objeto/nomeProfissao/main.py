@@ -3,9 +3,10 @@ from flet import AppBar, Text, View
 from flet.core.colors import Colors
 
 class User():
-    def __init__(self, name, profissao):
+    def __init__(self, name, profissao, salario):
         self.name = name
         self.profissao = profissao
+        self.salario = salario
 
 def main(page: ft.Page):
     # Configurações
@@ -21,7 +22,7 @@ def main(page: ft.Page):
         lv_Descricao.controls.clear()
         for user in lista:
             lv_Descricao.controls.append(
-                ft.Text(value=f'nome: {user.name};\nprofissão: {user.profissao}')
+                ft.Text(value=f'nome: {user.name};\nprofissão: {user.profissao}\n salario: {user.salario}')
             )
     def salvar_itens(e):
         if inputName.value == '' or inputProfissao.value == '':
@@ -33,7 +34,7 @@ def main(page: ft.Page):
             msg_error.open = True
             page.update()
         else:
-            user = User(name=inputName.value, profissao=inputProfissao.value)
+            user = User(name=inputName.value, profissao=inputProfissao.value, salario=inputSalario.value)
             lista.append(user)
             inputName.value = ''
             inputProfissao.value = ''
@@ -50,6 +51,7 @@ def main(page: ft.Page):
                     AppBar(title=Text("Home"), bgcolor=Colors.PRIMARY_CONTAINER),
                     inputName,
                     inputProfissao,
+                    inputSalario,
                     ft.Button(
                         text='salvar',
                         on_click=lambda _: salvar_itens(e)
@@ -106,6 +108,7 @@ def main(page: ft.Page):
     )
     inputName = ft.TextField(label='digite seu nome')
     inputProfissao = ft.TextField(label='digite seu profissão')
+    inputSalario = ft.TextField(label='digite seu salario')
 
     # Eventos
     page.on_route_change = gerencia_rotas
